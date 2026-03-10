@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pawfect Match</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ── Auth Card ── -->
+    <div class="card" id="auth-card">
+      <div class="cat-wrap">
+        <div class="cat-circle">
+          <img src="assets/login-image.jpg" alt="login" class="cat-img" />
+        </div>
+      </div>
+
+      <div class="tabs" id="auth-tabs">
+        <button class="tab active" onclick="switchTab('login')">Log In</button>
+        <button class="tab" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <!-- Login -->
+      <div class="view active" id="view-login">
+        <div class="msg" id="login-msg"></div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="email@email.com" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" />
+        </div>
+        <button class="btn" onclick="handleLogin()">Log in</button>
+        <div class="forgot-links">
+          <a href="#" onclick="switchTab('forgot-password')"
+            >Forgot password?</a
+          >
+          <a href="#" onclick="switchTab('forgot-username')"
+            >Forgot username?</a
+          >
+        </div>
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="view" id="view-forgot-password">
+        <div class="msg" id="fp-msg"></div>
+        <p class="forgot-desc">
+          Enter your email and we'll send you a reset link.
+        </p>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="fp-email" placeholder="email@email.com" />
+        </div>
+        <button class="btn" onclick="handleForgotPassword()">
+          Send Reset Link
+        </button>
+        <button class="btn-back" onclick="switchTab('login')">
+          ← Back to Login
+        </button>
+      </div>
+
+      <!-- Forgot Username -->
+      <div class="view" id="view-forgot-username">
+        <div class="msg" id="fu-msg"></div>
+        <p class="forgot-desc">
+          Enter your email and we'll send you your username.
+        </p>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="fu-email" placeholder="email@email.com" />
+        </div>
+        <button class="btn" onclick="handleForgotUsername()">
+          Send Username
+        </button>
+        <button class="btn-back" onclick="switchTab('login')">
+          ← Back to Login
+        </button>
+      </div>
+
+      <!-- Register -->
+      <div class="view" id="view-register">
+        <div class="msg" id="register-msg"></div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="reg-username" placeholder="coolcat42" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="reg-email" placeholder="email@email.com" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input
+            type="password"
+            id="reg-password"
+            placeholder="Min. 6 characters"
+          />
+        </div>
+        <button class="btn" onclick="handleRegister()">Create Account</button>
+      </div>
+    </div>
+
+    <!-- ── Dashboard ── -->
+    <div id="view-dashboard" class="dashboard-page">
+      <nav class="dash-nav">
+        <div class="dash-nav-brand">
+          Hey, <span id="dash-username">there</span>!
+        </div>
+
+        <!-- Profile dropdown button -->
+        <div class="profile-menu-wrap">
+          <button class="profile-btn" onclick="toggleMenu()" id="profile-btn">
+            <span id="profile-initial">?</span>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <button class="dropdown-item" onclick="showPage('adopt')">
+              Apply to Adopt
+            </button>
+            <button class="dropdown-item" onclick="showPage('applications')">
+              My Applications
+            </button>
+            <button class="dropdown-item" onclick="showPage('settings')">
+              Settings
+            </button>
+            <div class="dropdown-divider"></div>
+            <button
+              class="dropdown-item dropdown-logout"
+              onclick="handleLogout()"
+            >
+              Log Out
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Adoption page -->
+      <div class="dash-page active" id="page-adopt">
+        <div class="dash-content">
+          <div class="dash-card">
+            <h2 class="form-title">Adoption Application</h2>
+            <p class="form-subtitle">
+              Tell us a little about yourself so we can find your perfect match!
+            </p>
+            <div class="msg" id="adopt-msg"></div>
+            <div class="form-row">
+              <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="adopt-name" placeholder="Jane Doe" />
+              </div>
+              <div class="field">
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  id="adopt-phone"
+                  placeholder="(555) 000-0000"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label>Home Type</label>
+              <div class="radio-group">
+                <label class="radio-label"
+                  ><input type="radio" name="home-type" value="house" />
+                  House</label
+                >
+                <label class="radio-label"
+                  ><input type="radio" name="home-type" value="apartment" />
+                  Apartment</label
+                >
+                <label class="radio-label"
+                  ><input type="radio" name="home-type" value="condo" />
+                  Condo</label
+                >
+                <label class="radio-label"
+                  ><input type="radio" name="home-type" value="other" />
+                  Other</label
+                >
+              </div>
+            </div>
+            <div class="field">
+              <label>Do you have other pets?</label>
+              <div class="radio-group">
+                <label class="radio-label"
+                  ><input type="radio" name="other-pets" value="yes" />
+                  Yes</label
+                >
+                <label class="radio-label"
+                  ><input type="radio" name="other-pets" value="no" /> No</label
+                >
+              </div>
+            </div>
+            <div class="field">
+              <label>Why do you want to adopt?</label>
+              <textarea
+                id="adopt-reason"
+                placeholder="Tell us why you'd be a great pet parent..."
+              ></textarea>
+            </div>
+            <button class="btn" onclick="handleAdopt()">
+              Submit Application
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Applications page -->
+      <div class="dash-page" id="page-applications">
+        <div class="dash-content">
+          <div class="dash-card">
+            <h2 class="form-title">My Applications</h2>
+            <p class="form-subtitle">
+              A history of all your submitted adoption applications.
+            </p>
+            <div id="applications-list">
+              <p class="no-apps">No applications submitted yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings page -->
+      <div class="dash-page" id="page-settings">
+        <div class="dash-content">
+          <div class="dash-card" style="max-width: 500px">
+            <h2 class="form-title">Settings</h2>
+            <p class="form-subtitle">Manage your account details.</p>
+
+            <p class="settings-section-label">Change Username</p>
+            <div class="msg" id="cu-msg"></div>
+            <div class="field">
+              <label>New Username</label>
+              <input type="text" id="cu-username" placeholder="newusername" />
+            </div>
+            <button class="btn btn-sm" onclick="handleChangeUsername()">
+              Update Username
+            </button>
+
+            <div class="settings-divider"></div>
+
+            <p class="settings-section-label">Change Email</p>
+            <div class="msg" id="ce-msg"></div>
+            <div class="field">
+              <label>New Email</label>
+              <input type="email" id="ce-email" placeholder="new@email.com" />
+            </div>
+            <button class="btn btn-sm" onclick="handleChangeEmail()">
+              Update Email
+            </button>
+
+            <div class="settings-divider"></div>
+
+            <p class="settings-section-label">Change Password</p>
+            <div class="msg" id="cp-msg"></div>
+            <div class="field">
+              <label>Current Password</label>
+              <input type="password" id="cp-current" placeholder="••••••••" />
+            </div>
+            <div class="field">
+              <label>New Password</label>
+              <input
+                type="password"
+                id="cp-new"
+                placeholder="Min. 6 characters"
+              />
+            </div>
+            <button class="btn btn-sm" onclick="handleChangePassword()">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
